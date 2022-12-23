@@ -7,3 +7,8 @@ node_modules/
 *.sql
 *.tar.gz
 *.zip
+
+# ignore log files and databases
+*.log
+*.sql
+*.sqlite

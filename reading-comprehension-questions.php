@@ -284,7 +284,7 @@ add_action( 'wp_enqueue_scripts', 'rcq_enqueue_frontend_style' );
 // OPENAI CONSTANTS
 define("RCQ_OPENAI_PROMPT", "Write two multiple choice questions about the passage below to test reading comprehension. Give three or four options, for each question, and specify which is the correct answer.");
 define("RCQ_OPENAI_FORMAT", "The response should be in the following format: `[{ \"question\": \"QUESTION\", \"options\": [{\"text\": \"ANWSER\",\"correct\": false}, ]}]`");
-define("RCQ_OPENAI_MAX_LENGTH", 2000);
+define("RCQ_OPENAI_MAX_LENGTH", 1500);
 
 // CODE TO DISPLAY THE QUESTIONS
 function rcq_post_content( $content ) {

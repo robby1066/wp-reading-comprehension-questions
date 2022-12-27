@@ -562,7 +562,7 @@ function rcq_settings_page_callback() {
             </div>
 
 			<div class="form-item">
-                <label for="rcq_question_language"><?php _e( 'Language to generate questions in', 'reading-comprehension-questions' ); ?></label><br/>
+                <label for="rcq_parent_post_type"><?php _e( 'Post type to allow reading comprehension questions', 'reading-comprehension-questions' ); ?></label><br/>
                 <?php 
 					function filter_post_types($pt) {
 						$not_allowed = array( 'attachment', RCQ_POST_TYPE_KEY );
@@ -576,9 +576,9 @@ function rcq_settings_page_callback() {
 						) 
 					);
                 ?>
-                <select name="rcq_question_language" id="rcq_question_language">
+                <select name="rcq_parent_post_type" id="rcq_parent_post_type">
 					<?php foreach ($post_types as $post_type): ?>
-						<option value="<?php echo $post_type->name; ?>"><?php _e($post_type->labels->name); ?></option>
+						<option value="<?php echo $post_type->name; ?>" <?php selected( $parent_post_type, $post_type->name); ?> ><?php _e($post_type->labels->name); ?></option>
 					<?php endforeach; ?>
                 </select>
                 <p class="description"><?php _e( 'The post type that can have reading comprehension questions', 'reading-comprehension-questions' ); ?></p>

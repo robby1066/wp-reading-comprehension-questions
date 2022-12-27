@@ -163,6 +163,13 @@ function display_posts_dropdown_menu( $post ) {
 function rcq_display_attached_questions_for_editor( $post ) {
     $questions = rcq_get_questions( $post->ID );
 
+    $post_length = strlen( wp_strip_all_tags( $post->post_content ) );
+
+    if ( empty( $questions ) && $post_length < 50 ) {
+        echo "<p>" . __( 'Once you add some content and save this post, you will be able to add reading comprehension questions.', 'reading-comprehension-questions' ) . "</p>";
+        return;
+    }
+
     $rcq_nonce = wp_create_nonce( 'rcq-nonce' );
     $get_data = http_build_query( array( 
         'rcq_nonce' => $rcq_nonce, 

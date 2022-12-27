@@ -9,7 +9,10 @@ Questions can be added manually or can be automatically generated with [GPT3](ht
 - Questions are displayed at the end of posts in an expandable block
 - Configure what type of post should get reading comprehension questions (default `post`)
 - Automatically generate questions with GPT3 (requires an OpenAI API token).
+- Choose the language you want automatically generated questions to be returned in.
 
 ## Todo:
 - Add a setting to display comprehension questions in an expandable block or in a modal window.
 - Add translations for other supported languages (currently Spanish is translated)
+- Add option to randomize question order
+- Add option to limit questions displayed per post

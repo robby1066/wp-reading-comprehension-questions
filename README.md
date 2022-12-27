@@ -12,7 +12,4 @@ Questions can be added manually or can be automatically generated with [GPT3](ht
 - Choose the language you want automatically generated questions to be returned in.
 
 ## Todo:
-- Add a setting to display comprehension questions in an expandable block or in a modal window.
-- Add translations for other supported languages (currently Spanish is translated)
-- Add option to randomize question order
-- Add option to limit questions displayed per post
+[See the open issues](https://github.com/robby1066/wp-reading-comprehension-questions/issues)

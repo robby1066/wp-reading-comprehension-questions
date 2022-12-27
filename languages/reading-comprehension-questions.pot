@@ -1,0 +1,122 @@
+# Copyright (C) 2022 Robby Macdonell
+# This file is distributed under the same license as the Reading Comprehension Questions plugin.
+msgid ""
+msgstr ""
+"Project-Id-Version: Reading Comprehension Questions 0.1.0\n"
+"Report-Msgid-Bugs-To: https://wordpress.org/support/plugin/reading-comprehension-questions\n"
+"Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
+"Language-Team: LANGUAGE <LL@li.org>\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"POT-Creation-Date: 2022-12-27T18:40:40+00:00\n"
+"PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
+"X-Generator: WP-CLI 2.7.1\n"
+"X-Domain: reading-comprehension-questions\n"
+
+#. Plugin Name of the plugin
+#: reading-comprehension-questions.php:481
+#: reading-comprehension-questions.php:508
+msgid "Reading Comprehension Questions"
+msgstr ""
+
+#. Plugin URI of the plugin
+msgid "https://github.com/robby1066/wp-reading-comprehension-questions"
+msgstr ""
+
+#. Description of the plugin
+msgid "A plugin for educational sites to easily add reading comprehension questions to the end of their posts."
+msgstr ""
+
+#. Author of the plugin
+msgid "Robby Macdonell"
+msgstr ""
+
+#. Author URI of the plugin
+msgid "https://www.robbymacdonell.com"
+msgstr ""
+
+#: reading-comprehension-questions.php:24
+msgctxt "Post type general name"
+msgid "Questions"
+msgstr ""
+
+#: reading-comprehension-questions.php:25
+msgctxt "Post type singular name"
+msgid "Question"
+msgstr ""
+
+#: reading-comprehension-questions.php:26
+msgctxt "Admin Menu text"
+msgid "Questions"
+msgstr ""
+
+#: reading-comprehension-questions.php:27
+msgctxt "Add New on Toolbar"
+msgid "Question"
+msgstr ""
+
+#: reading-comprehension-questions.php:28
+#: reading-comprehension-questions.php:48
+msgid "Parent Post:"
+msgstr ""
+
+#: reading-comprehension-questions.php:58
+msgid "Responses"
+msgstr ""
+
+#: reading-comprehension-questions.php:107
+msgid "Add new"
+msgstr ""
+
+#: reading-comprehension-questions.php:145
+msgid "Select a post"
+msgstr ""
+
+#: reading-comprehension-questions.php:189
+msgid "Generate questions"
+msgstr ""
+
+#: reading-comprehension-questions.php:190
+msgid "Add manually"
+msgstr ""
+
+#: reading-comprehension-questions.php:507
+msgid "Reading Comprehension Questions Settings"
+msgstr ""
+
+#: reading-comprehension-questions.php:536
+msgid "OpenAI API Key"
+msgstr ""
+
+#: reading-comprehension-questions.php:538
+msgid "Enter your OpenAI API key here."
+msgstr ""
+
+#: reading-comprehension-questions.php:542
+msgid "Language to generate questions in"
+msgstr ""
+
+#: reading-comprehension-questions.php:550
+msgid "Auto-detect"
+msgstr ""
+
+#: reading-comprehension-questions.php:551
+msgid "English"
+msgstr ""
+
+#: reading-comprehension-questions.php:552
+msgid "Spanish"
+msgstr ""
+
+#: reading-comprehension-questions.php:553
+msgid "Italian"
+msgstr ""
+
+#: reading-comprehension-questions.php:554
+msgid "French"
+msgstr ""
+
+#: reading-comprehension-questions.php:556
+msgid "Choose the language you want your questions to be generated in. Leave set on \"Auto-detect\" to let the AI take it's best guess."
+msgstr ""

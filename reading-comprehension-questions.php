@@ -28,6 +28,15 @@ function rcq_create_question_post_type() {
 			'menu_name' => _x( 'Questions', 'Admin Menu text', 'reading-comprehension-questions' ),
 			'name_admin_bar' => _x( 'Question', 'Add New on Toolbar', 'reading-comprehension-questions' ),
 			'parent_item_colon' => __( 'Parent Post:', 'reading-comprehension-questions' ),
+            'add_new'            => _x( 'Add New', 'question', 'reading-comprehension-questions' ),
+            'add_new_item'       => __( 'Add New Question', 'reading-comprehension-questions' ),
+            'edit_item'          => __( 'Edit Question', 'reading-comprehension-questions' ),
+            'new_item'           => __( 'New Question', 'reading-comprehension-questions' ),
+            'all_items'          => __( 'All Questions', 'reading-comprehension-questions' ),
+            'view_item'          => __( 'View Question', 'reading-comprehension-questions' ),
+            'search_items'       => __( 'Search Questions', 'reading-comprehension-questions' ),
+            'not_found'          => __( 'No questions found', 'reading-comprehension-questions' ),
+            'not_found_in_trash' => __( 'No questions found in the Trash', 'reading-comprehension-questions' ),
         ),
         'public' => true,
         'has_archive' => true,
@@ -320,7 +329,7 @@ function rcq_generate_questions() {
     ]);
 
     if ( rcq_create_question_from_json( $result['choices'][0]['text'], $post_id ) == false ) {
-        rcq_set_notification_message( __( 'There was a problem with the response from GPT. Please try again', 'reading-comprehension-questions' ) );
+        rcq_set_notification_message( __( 'There was a problem with the response from GPT. Please try again.', 'reading-comprehension-questions' ) );
     };
 
     $get_data = http_build_query( array( 
@@ -552,7 +561,6 @@ function rcq_register_settings() {
 }
 
 add_action( 'admin_init', 'rcq_register_settings' );
-  
 
 // Add the settings page
 function rcq_settings_page() {
@@ -567,7 +575,6 @@ function rcq_settings_page() {
 
 add_action( 'admin_menu', 'rcq_settings_page' );
 
-
 // Callback function for the settings page
 function rcq_settings_page_callback() {
     // Check user capability
@@ -577,6 +584,7 @@ function rcq_settings_page_callback() {
   
     // Display the settings form
     ?>
+
     <div class="wrap">
         <h1><?php echo esc_html( get_admin_page_title() ); ?></h1>
         <form method="post" action="options.php">
@@ -585,52 +593,64 @@ function rcq_settings_page_callback() {
                 settings_fields( 'rcq_settings' );
                 do_settings_sections( 'rcq_settings' );
             ?>
-            <div class="form-item">
-                <label for="rcq_api_token"><?php _e( 'OpenAI API Key', 'reading-comprehension-questions' ); ?></label><br/>
-                <input type="text" name="rcq_api_token" id="rcq_api_token" value="<?php echo esc_attr( get_option( 'rcq_api_token' ) ); ?>" class="regular-text" />
-                <p class="description"><?php _e( 'Enter your OpenAI API key here.', 'reading-comprehension-questions' ); ?></p>
-            </div>
 
-            <div class="form-item">
-                <label for="rcq_question_language"><?php _e( 'Language to generate questions in', 'reading-comprehension-questions' ); ?></label><br/>
-                <?php 
-                    $question_language = get_option( 'rcq_question_language' ); 
-                    if (is_null($question_language)) {
-                        $question_language = 'auto';
-                    }
-                ?>
-                <select name="rcq_question_language" id="rcq_question_language">
-                    <option value="auto" <?php selected( $question_language, 'auto' ); ?> ><?php _e( 'Auto-detect', 'reading-comprehension-questions' ); ?></option>
-                    <option value="en" <?php selected( $question_language, 'en' ); ?> ><?php _e( 'English', 'reading-comprehension-questions' ); ?></option>
-                    <option value="es" <?php selected( $question_language, 'es' ); ?> ><?php _e( 'Spanish', 'reading-comprehension-questions' ); ?></option>
-                    <option value="it" <?php selected( $question_language, 'it' ); ?> ><?php _e( 'Italian', 'reading-comprehension-questions' ); ?></option>
-                    <option value="fr" <?php selected( $question_language, 'fr' ); ?> ><?php _e( 'French', 'reading-comprehension-questions' ); ?></option>
-                </select>
-                <p class="description"><?php _e( 'Choose the language you want your questions to be generated in. Leave set on "Auto-detect" to let the AI take it\'s best guess.', 'reading-comprehension-questions' ); ?></p>
-            </div>
+            <table class="form-table" role="presentation">
+                <tr>
+                    <th scope="row"><label for="rcq_api_token"><?php _e( 'OpenAI API Key', 'reading-comprehension-questions' ); ?></label></th>
+                    <td>
+                        <input type="text" name="rcq_api_token" id="rcq_api_token" value="<?php echo esc_attr( get_option( 'rcq_api_token' ) ); ?>" class="regular-text" />
+                        <p class="description"><?php _e( 'Enter your OpenAI API key here.', 'reading-comprehension-questions' ); ?></p>
+                    </td>
+                </tr>
 
-			<div class="form-item">
-                <label for="rcq_parent_post_type"><?php _e( 'Post type to allow reading comprehension questions', 'reading-comprehension-questions' ); ?></label><br/>
-                <?php 
-					function filter_post_types($pt) {
-						$not_allowed = array( 'attachment', RCQ_POST_TYPE_KEY );
-						return ! in_array( $pt->name, $not_allowed );
-					}
-                    $parent_post_type = get_option( 'rcq_parent_post_type' ); 
-					$post_types = array_values(
-						array_filter( 
-							get_post_types( array( 'public' => true, 'show_in_menu' => true ), 'objects' ), 
-							'filter_post_types'
-						) 
-					);
-                ?>
-                <select name="rcq_parent_post_type" id="rcq_parent_post_type">
-					<?php foreach ($post_types as $post_type): ?>
-						<option value="<?php echo $post_type->name; ?>" <?php selected( $parent_post_type, $post_type->name); ?> ><?php _e($post_type->labels->name); ?></option>
-					<?php endforeach; ?>
-                </select>
-                <p class="description"><?php _e( 'The post type that can have reading comprehension questions', 'reading-comprehension-questions' ); ?></p>
-            </div>
+                
+
+                <tr>
+                    <th scope="row"><label for="rcq_api_token"><?php _e( 'Language to generate questions in', 'reading-comprehension-questions' ); ?></label></th>
+                    <td>
+                        <?php 
+                            $question_language = get_option( 'rcq_question_language' ); 
+                            if (is_null($question_language)) {
+                                $question_language = 'auto';
+                            }
+                        ?>
+                        <select name="rcq_question_language" id="rcq_question_language">
+                            <option value="auto" <?php selected( $question_language, 'auto' ); ?> ><?php _e( 'Auto-detect', 'reading-comprehension-questions' ); ?></option>
+                            <option value="en" <?php selected( $question_language, 'en' ); ?> ><?php _e( 'English', 'reading-comprehension-questions' ); ?></option>
+                            <option value="es" <?php selected( $question_language, 'es' ); ?> ><?php _e( 'Spanish', 'reading-comprehension-questions' ); ?></option>
+                            <option value="it" <?php selected( $question_language, 'it' ); ?> ><?php _e( 'Italian', 'reading-comprehension-questions' ); ?></option>
+                            <option value="fr" <?php selected( $question_language, 'fr' ); ?> ><?php _e( 'French', 'reading-comprehension-questions' ); ?></option>
+                        </select>
+                        <p class="description"><?php _e( 'Choose the language you want your questions to be generated in. Leave set on "Auto-detect" to let the AI take it\'s best guess.', 'reading-comprehension-questions' ); ?></p>
+                    </td>
+                </tr>
+
+                <tr>
+                    <th scope="row"><label for="rcq_parent_post_type"><?php _e( 'Post type to allow reading comprehension questions', 'reading-comprehension-questions' ); ?></label></th>
+                    <td>
+                        <?php 
+                            function filter_post_types($pt) {
+                                $not_allowed = array( 'attachment', RCQ_POST_TYPE_KEY );
+                                return ! in_array( $pt->name, $not_allowed );
+                            }
+                            $parent_post_type = get_option( 'rcq_parent_post_type' ); 
+                            $post_types = array_values(
+                                array_filter( 
+                                    get_post_types( array( 'public' => true, 'show_in_menu' => true ), 'objects' ), 
+                                    'filter_post_types'
+                                ) 
+                            );
+                        ?>
+                        <select name="rcq_parent_post_type" id="rcq_parent_post_type">
+                            <?php foreach ($post_types as $post_type): ?>
+                                <option value="<?php echo $post_type->name; ?>" <?php selected( $parent_post_type, $post_type->name); ?> ><?php _e($post_type->labels->name); ?></option>
+                            <?php endforeach; ?>
+                        </select>
+                    </td>
+                </tr>
+
+
+            </table>
             
             <?php submit_button(); ?>   
         </form>

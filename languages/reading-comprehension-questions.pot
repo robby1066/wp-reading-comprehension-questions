@@ -9,114 +9,161 @@ msgstr ""
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"POT-Creation-Date: 2022-12-27T18:40:40+00:00\n"
+"POT-Creation-Date: 2022-12-29T01:48:57+00:00\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "X-Generator: WP-CLI 2.7.1\n"
 "X-Domain: reading-comprehension-questions\n"
 
 #. Plugin Name of the plugin
-#: reading-comprehension-questions.php:481
-#: reading-comprehension-questions.php:508
+#: reading-comprehension-questions.php:512
+#: reading-comprehension-questions.php:569
 msgid "Reading Comprehension Questions"
-msgstr ""
-
-#. Plugin URI of the plugin
-msgid "https://github.com/robby1066/wp-reading-comprehension-questions"
 msgstr ""
 
 #. Description of the plugin
 msgid "A plugin for educational sites to easily add reading comprehension questions to the end of their posts."
 msgstr ""
 
-#. Author of the plugin
-msgid "Robby Macdonell"
-msgstr ""
-
-#. Author URI of the plugin
-msgid "https://www.robbymacdonell.com"
-msgstr ""
-
-#: reading-comprehension-questions.php:24
+#: reading-comprehension-questions.php:26
 msgctxt "Post type general name"
 msgid "Questions"
 msgstr ""
 
-#: reading-comprehension-questions.php:25
+#: reading-comprehension-questions.php:27
 msgctxt "Post type singular name"
 msgid "Question"
 msgstr ""
 
-#: reading-comprehension-questions.php:26
+#: reading-comprehension-questions.php:28
 msgctxt "Admin Menu text"
 msgid "Questions"
 msgstr ""
 
-#: reading-comprehension-questions.php:27
+#: reading-comprehension-questions.php:29
 msgctxt "Add New on Toolbar"
 msgid "Question"
 msgstr ""
 
-#: reading-comprehension-questions.php:28
-#: reading-comprehension-questions.php:48
+#: reading-comprehension-questions.php:30
+#: reading-comprehension-questions.php:59
 msgid "Parent Post:"
 msgstr ""
 
-#: reading-comprehension-questions.php:58
+#: reading-comprehension-questions.php:31
+msgctxt "question"
+msgid "Add New"
+msgstr ""
+
+#: reading-comprehension-questions.php:32
+msgid "Add New Question"
+msgstr ""
+
+#: reading-comprehension-questions.php:33
+msgid "Edit Question"
+msgstr ""
+
+#: reading-comprehension-questions.php:34
+msgid "New Question"
+msgstr ""
+
+#: reading-comprehension-questions.php:35
+msgid "All Questions"
+msgstr ""
+
+#: reading-comprehension-questions.php:36
+msgid "View Question"
+msgstr ""
+
+#: reading-comprehension-questions.php:37
+msgid "Search Questions"
+msgstr ""
+
+#: reading-comprehension-questions.php:38
+msgid "No questions found"
+msgstr ""
+
+#: reading-comprehension-questions.php:39
+msgid "No questions found in the Trash"
+msgstr ""
+
+#: reading-comprehension-questions.php:69
 msgid "Responses"
 msgstr ""
 
-#: reading-comprehension-questions.php:107
+#: reading-comprehension-questions.php:118
 msgid "Add new"
 msgstr ""
 
-#: reading-comprehension-questions.php:145
+#: reading-comprehension-questions.php:156
 msgid "Select a post"
 msgstr ""
 
-#: reading-comprehension-questions.php:189
+#: reading-comprehension-questions.php:178
+msgid "Once you add some content and save this post, you will be able to add reading comprehension questions."
+msgstr ""
+
+#: reading-comprehension-questions.php:207
 msgid "Generate questions"
 msgstr ""
 
-#: reading-comprehension-questions.php:190
+#: reading-comprehension-questions.php:208
 msgid "Add manually"
 msgstr ""
 
-#: reading-comprehension-questions.php:507
+#: reading-comprehension-questions.php:332
+msgid "There was a problem with the response from GPT. Please try again."
+msgstr ""
+
+#: reading-comprehension-questions.php:445
+msgid "Created"
+msgstr ""
+
+#: reading-comprehension-questions.php:445
+msgid "question"
+msgid_plural "questions"
+msgstr[0] ""
+msgstr[1] ""
+
+#: reading-comprehension-questions.php:568
 msgid "Reading Comprehension Questions Settings"
 msgstr ""
 
-#: reading-comprehension-questions.php:536
+#: reading-comprehension-questions.php:599
 msgid "OpenAI API Key"
 msgstr ""
 
-#: reading-comprehension-questions.php:538
+#: reading-comprehension-questions.php:602
 msgid "Enter your OpenAI API key here."
 msgstr ""
 
-#: reading-comprehension-questions.php:542
+#: reading-comprehension-questions.php:609
 msgid "Language to generate questions in"
 msgstr ""
 
-#: reading-comprehension-questions.php:550
+#: reading-comprehension-questions.php:618
 msgid "Auto-detect"
 msgstr ""
 
-#: reading-comprehension-questions.php:551
+#: reading-comprehension-questions.php:619
 msgid "English"
 msgstr ""
 
-#: reading-comprehension-questions.php:552
+#: reading-comprehension-questions.php:620
 msgid "Spanish"
 msgstr ""
 
-#: reading-comprehension-questions.php:553
+#: reading-comprehension-questions.php:621
 msgid "Italian"
 msgstr ""
 
-#: reading-comprehension-questions.php:554
+#: reading-comprehension-questions.php:622
 msgid "French"
 msgstr ""
 
-#: reading-comprehension-questions.php:556
+#: reading-comprehension-questions.php:624
 msgid "Choose the language you want your questions to be generated in. Leave set on \"Auto-detect\" to let the AI take it's best guess."
+msgstr ""
+
+#: reading-comprehension-questions.php:629
+msgid "Post type to allow reading comprehension questions"
 msgstr ""

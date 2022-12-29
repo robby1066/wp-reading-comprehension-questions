@@ -283,7 +283,7 @@ add_action( 'wp_enqueue_scripts', 'rcq_enqueue_frontend_style' );
 
 // OPENAI CONSTANTS
 define("RCQ_OPENAI_PROMPT", "Write two multiple choice questions about the passage below to test reading comprehension. Give three or four options, for each question, and specify which is the correct answer.");
-define("RCQ_OPENAI_FORMAT", "The response should be in the following format: `[{ \"question\": \"QUESTION\", \"options\": [{\"text\": \"ANWSER\",\"correct\": false}, ]}]`");
+define("RCQ_OPENAI_FORMAT", "The response should be in the following format: `[{ \"question\": \"QUESTION\", \"options\": [{\"text\": \"ANWSER\",\"correct\": false}, ]},{ \"question\": \"QUESTION\", \"options\": [{\"text\": \"ANWSER\",\"correct\": false}, ]}]`");
 define("RCQ_OPENAI_MAX_LENGTH", 1500);
 
 // CODE TO DISPLAY THE QUESTIONS
@@ -319,9 +319,9 @@ function rcq_generate_questions() {
         'prompt' => rcq_openai_prompt() . $plain_text_content . "\n\n" . rcq_openai_format(),
     ]);
 
-    $object = json_decode( $result['choices'][0]['text'] );
-
-    rcq_create_question_from_json( $result['choices'][0]['text'], $post_id );
+    if ( rcq_create_question_from_json( $result['choices'][0]['text'], $post_id ) == false ) {
+        rcq_set_notification_message( __( 'There was a problem with the response from GPT. Please try again', 'reading-comprehension-questions' ) );
+    };
 
     $get_data = http_build_query( array( 
         'action' => 'edit', 
@@ -370,6 +370,7 @@ function rcq_get_question_text_block( $post ) {
 
 function rcq_create_question_from_json( $json, $post_id ) {
     $json_decoded = json_decode( $json );
+    $processed = 0;
 
     if ( is_array( $json_decoded ) ) {
         $objects = $json_decoded;
@@ -382,7 +383,9 @@ function rcq_create_question_from_json( $json, $post_id ) {
     }
 
     foreach ( $objects as $object ) {
+
         if ( is_null( $object ) || ! property_exists( $object, 'options' ) || !property_exists( $object, 'question' ) ) {
+            array_push( $messages, 'Something went wrong with one of the objects');
 			continue;
         }
         $new_post = array(
@@ -423,7 +426,17 @@ function rcq_create_question_from_json( $json, $post_id ) {
                     $correct_index,
                 );
             }
+
+            $processed = $processed + 1;
+
         }
+    }
+
+    if ( $processed > 0 ) {
+        rcq_set_notification_message( __( 'Created', 'reading-comprehension-questions' ) . ' ' . $processed . ' ' . _n( 'question', 'questions', $processed, 'reading-comprehension-questions' ) );
+        return true;
+    } else {
+        return false;
     }
 }
 
@@ -500,6 +513,34 @@ function rcq_display_questions( $post_id ) {
 
 // SETTINGS
 // -----------------------------------------------------------------------
+
+// Set notifications that will get picked up by the block editor
+// we expect these notifications to get picked up very quickly so expire them after a few seconds.
+function rcq_set_notification_message( $message ) {
+    set_transient( 'rcq_notifiction', $message, 10 );
+}
+
+// check for notices to display to the user after a page refresh
+function rcq_enqueue_notifications() {
+    $notification_message = get_transient( 'rcq_notifiction' );
+    if ( empty( $notification_message ) ) {
+        return false;
+    }
+
+    wp_enqueue_script(
+        'rcq-notifications',
+        plugins_url( 'js/notifications.js', __FILE__ ),
+        array( ),
+        false,
+        true
+    );
+
+    wp_add_inline_script( 'rcq-notifications', 'const RCQ_NOTIFICATION = "'. $notification_message .'";', 'before' );
+
+    // delete the notification so we don't get confused on future page loads
+    delete_transient( 'rcq_notifiction' );
+}
+add_action( 'enqueue_block_editor_assets', 'rcq_enqueue_notifications' );
 
 // Register the setting
 function rcq_register_settings() {

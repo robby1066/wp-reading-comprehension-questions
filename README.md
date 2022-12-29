@@ -3,6 +3,8 @@ A wordpress plugin for educational sites to easily add interactive reading compr
 
 Questions can be added manually or can be automatically generated with [GPT3](https://openai.com/api/).
 
+![An image of the reading comprehension questions in action](../media/frontend-example.gif?raw=true)
+
 ## Features:
 - Generate unlimited multiple-choice reading comprehension questions for posts
 - Questions can have unlimited possible answers (only one correct answer)
